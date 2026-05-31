@@ -43,7 +43,9 @@ class _RegisterPageState extends State<RegisterPage> {
         );
 
         // Update nama display user di Firebase jika berhasil
-        await userCredential.user?.updateDisplayName(_nameCtrl.text.trim());
+        if (userCredential.user != null) {
+          await userCredential.user!.updateDisplayName(_nameCtrl.text.trim());
+        }
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -63,18 +65,41 @@ class _RegisterPageState extends State<RegisterPage> {
       } on FirebaseAuthException catch (e) {
         String message = 'Terjadi kesalahan saat mendaftar';
         if (e.code == 'weak-password') {
-          message = 'Kata sandi terlalu lemah.';
+          message = 'Kata sandi terlalu lemah. Gunakan minimal 6 karakter dengan huruf dan angka.';
         } else if (e.code == 'email-already-in-use') {
           message = 'Email ini sudah digunakan oleh akun lain.';
         } else if (e.code == 'invalid-email') {
           message = 'Format email tidak valid.';
+        } else if (e.code == 'operation-not-allowed') {
+          message = 'Registrasi belum diaktifkan di Firebase.';
+        } else if (e.code == 'network-request-failed') {
+          message = 'Gagal terhubung ke server. Periksa koneksi internet Anda.';
         }
+
+        // ignore: avoid_print
+        print('❌ Firebase Registration Error: ${e.code} - ${e.message}');
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(message),
               backgroundColor: Colors.red,
+              duration: const Duration(seconds: 5),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        }
+      } catch (e) {
+        // Tangkap semua exception yang tidak terduga
+        // ignore: avoid_print
+        print('❌ General Registration Error: $e');
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Terjadi kesalahan yang tidak terduga: $e'),
+              backgroundColor: Colors.red,
+              duration: const Duration(seconds: 5),
               behavior: SnackBarBehavior.floating,
             ),
           );
