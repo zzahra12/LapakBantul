@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "218681838174",
+    "project_id": "lapak-bantul-10575",
+    "storage_bucket": "lapak-bantul-10575.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218681838174:android:c034d0916afe499a6bc2cf",
+        "android_client_info": {
+          "package_name": "com.example.lapak_bantul"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD7Wp_vmBY5Bi4nJKSEeJk4mPFkMuPUkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

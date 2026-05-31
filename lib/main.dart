@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-// 1. IMPORT file splash screen kamu
-import 'screens/splash/splash_screen.dart'; 
+import 'package:firebase_core/firebase_core.dart';
+import 'screens/splash/splash_screen.dart'; // 🚀 MEMANGGIL SPLASH SCREEN GURUMU
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -12,14 +14,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Lapak Bantul',
+      title: 'LaPak Bantul',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // Tips: Pakai colorScheme biar lebih modern (Material 3)
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF003566)),
+        fontFamily: 'Poppins',
+        primaryColor: const Color(0xFF003566),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF003566),
+          primary: const Color(0xFF003566),
+        ),
         useMaterial3: true,
       ),
-      // 2. GANTI HomePage() menjadi SplashScreen()
+      // 🚀 DI SINI UTAMANYA: Aplikasi wajib dibuka lewat SplashScreen dulu!
       home: const SplashScreen(), 
     );
   }

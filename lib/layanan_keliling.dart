@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'pbb_page.dart'; // 🔥 TAMBAH INI
+import 'main_navigation.dart';
 
 class LayananKelilingPage extends StatelessWidget {
-  LayananKelilingPage({super.key});
+  final int currentIndex;
+
+  LayananKelilingPage({super.key, this.currentIndex = 4});
 
   final List<Map<String, String>> mobilList = [
     {
@@ -26,6 +29,7 @@ class LayananKelilingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
+      bottomNavigationBar: MainNavigation(currentIndex: currentIndex),
 
       appBar: AppBar(
   backgroundColor: Colors.white,

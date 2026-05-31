@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 // Import semua halaman yang mau dituju
 import 'home_page.dart';
 import 'pbb_page.dart';
+import 'api_demo_page.dart';
+import 'layanan_keliling.dart';
 
 class MainNavigation extends StatelessWidget {
   final int currentIndex;
@@ -32,7 +34,25 @@ class MainNavigation extends StatelessWidget {
             MaterialPageRoute(builder: (context) => PBBPage()),
           );
         }
-        // Kendaraan, Usaha, Keliling sementara belum ada tujuannya
+        // 🔥 Navigasi lainnya
+        else if (index == 2) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => LayananKelilingPage(currentIndex: 2)),
+          );
+        } else if (index == 4) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => LayananKelilingPage(currentIndex: 4)),
+          );
+        }
+        // 🔥 SEKARANG SUDAH MASUK DI SINI (DI BAWAH INDEX == 1)
+        else if (index == 5) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const ApiDemoPage()),
+          );
+        }
       },
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Beranda'),
